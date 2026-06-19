@@ -58,11 +58,36 @@ export default function QuizComponent() {
     }
   };
 
+  const handleReset = () => {
+    setCurrentIndex(0);
+    setScore(0);
+    setIsCompleted(false);
+    setIsChecked(false);
+    setSelectedAnswer('');
+  };
+
   if (isCompleted) {
     return (
       <div style={{ padding: '30px', fontFamily: 'Arial, sans-serif' }}>
-        <h1 style={{ color: '#dc3545', fontSize: '46px', margin: '0 0 15px 0', fontWeight: 'bold' }}>Quiz Completed!</h1>
-        <p style={{ fontSize: '24px', margin: '0' }}>Your score: {score}</p>
+        <h1 style={{ color: '#dc3545', fontSize: '46px', margin: '0 0 15px 0', fontWeight: 'bold' }}>
+          Quiz Completed!
+        </h1>
+        <p style={{ fontSize: '24px', marginBottom: '20px' }}>Your score: {score}</p>
+        <button
+          onClick={handleReset}
+          style={{
+            backgroundColor: '#6c757d',
+            color: 'white',
+            border: 'none',
+            padding: '10px 25px',
+            fontSize: '16px',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 'bold'
+          }}
+        >
+          Try Again
+        </button>
       </div>
     );
   }
@@ -92,7 +117,7 @@ export default function QuizComponent() {
                 alignItems: 'center',
                 padding: '15px',
                 borderBottom: index < currentQuiz.answers.length - 1 ? '1px solid #ced4da' : 'none',
-                cursor: 'pointer',
+                cursor: isChecked ? 'not-allowed' : 'pointer',
                 fontSize: '18px',
                 backgroundColor: bg
               }}
